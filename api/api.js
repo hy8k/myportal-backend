@@ -4,7 +4,7 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 router.get("/list", async (req, res) => {
-    const memoList = (await prisma.memo.findMany()).sort().reduce((acc, memo) => {
+    const memoList = (await prisma.memo.findMany()).reduce((acc, memo) => {
         acc[memo.title] = { content: memo.content };
         return acc;
     }, {});
@@ -28,7 +28,7 @@ router.post("/save", async (req, res) => {
         }
     })
 
-    const memoList = (await prisma.memo.findMany()).sort().reduce((acc, memo) => {
+    const memoList = (await prisma.memo.findMany()).reduce((acc, memo) => {
         acc[memo.title] = { content: memo.content, id: memo.id };
         return acc;
     }, {});
@@ -50,7 +50,7 @@ router.post("/rename", async (req, res) => {
         }
     })
 
-    const memoList = (await prisma.memo.findMany()).sort().reduce((acc, memo) => {
+    const memoList = (await prisma.memo.findMany()).reduce((acc, memo) => {
         acc[memo.title] = { content: memo.content };
         return acc;
     }, {});
@@ -65,7 +65,7 @@ router.post("/delete", async (req, res) => {
         }
     })
 
-    const memoList = (await prisma.memo.findMany()).sort().reduce((acc, memo) => {
+    const memoList = (await prisma.memo.findMany()).reduce((acc, memo) => {
         acc[memo.title] = { content: memo.content };
         return acc;
     }, {});
