@@ -16,10 +16,7 @@ const getMemoList = async () => {
 }
 
 router.get("/list", async (req, res) => {
-    const memoList = (await prisma.memo.findMany()).reduce((acc, memo) => {
-        acc[memo.title] = { content: memo.content };
-        return acc;
-    }, {});
+    const memoList = await getMemoList();
     res.send({ memoList: memoList })
 });
 
@@ -40,10 +37,7 @@ router.post("/save", async (req, res) => {
         }
     })
 
-    const memoList = (await prisma.memo.findMany()).reduce((acc, memo) => {
-        acc[memo.title] = { content: memo.content, id: memo.id };
-        return acc;
-    }, {});
+    const memoList = await getMemoList();
     res.send({ success: true, memoList: memoList })
 });
 
@@ -62,10 +56,7 @@ router.post("/rename", async (req, res) => {
         }
     })
 
-    const memoList = (await prisma.memo.findMany()).reduce((acc, memo) => {
-        acc[memo.title] = { content: memo.content };
-        return acc;
-    }, {});
+    const memoList = await getMemoList();
     res.send({ success: true, memoList: memoList })
 });
 router.post("/delete", async (req, res) => {
@@ -77,10 +68,7 @@ router.post("/delete", async (req, res) => {
         }
     })
 
-    const memoList = (await prisma.memo.findMany()).reduce((acc, memo) => {
-        acc[memo.title] = { content: memo.content };
-        return acc;
-    }, {});
+    const memoList = await getMemoList();
     res.send({ success: true, memoList: memoList })
 });
 
